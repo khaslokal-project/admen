@@ -99,8 +99,8 @@ class CustomizedTable extends React.Component {
                 <CustomTableCell>{products.idcategory}</CustomTableCell>
                 <CustomTableCell>{products.idseller}</CustomTableCell>
                 <CustomTableCell>
-                    <Button variant="contained" color="primary" button component={Link} to="/update" >Edit</Button>
-                    <Button color="danger"
+                    <Button variant="contained" color="primary" button component={Link} to="/product/:id" >Edit</Button>
+                    <Button color="secondary"
                         onClick={() => {
                             this.showDelete(products);
                         }}

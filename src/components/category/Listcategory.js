@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import {Link} from 'react-router-dom';
-import {TableCell, Button} from '@material-ui/core';
+import {TableCell, Button, TableBody} from '@material-ui/core';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
@@ -17,10 +17,6 @@ const CustomTableCell = withStyles(theme => ({
     head: {
         primary: pink,
         secondary: deepOrange,
-    },
-    palette: {
-        primary: pink,
-        secondary: pink,
     },
     body: {
         fontSize: 14,
@@ -75,14 +71,12 @@ class CustomizedTable extends React.Component {
     getData(){
         axios.get(`${process.env.REACT_APP_API_URL}/productcategory/`)
             .then((response) => {
-                console.log(response);
                 this.setState({category: response.data});
             })
             .catch((err) => {
                 console.log(err);
             });
     }
-
   
     render() {
         const { classes } = this.props;
@@ -92,8 +86,8 @@ class CustomizedTable extends React.Component {
                 <CustomTableCell component="th" scope="row"> {category.name}
                 </CustomTableCell>
                 <CustomTableCell>
-                    <Button variant="contained" color="primary" button component={Link} to="/sellerupdate">Edit</Button>
-                    <Button color="danger"
+                    <Button variant="contained" color="primary" component={Link} to="/category/:id">Edit</Button>
+                    <Button color="secondary"
                         onClick={() => {
                             this.showDelete(category);
                         }}
@@ -111,9 +105,13 @@ class CustomizedTable extends React.Component {
                             <CustomTableCell>Action</CustomTableCell>
                         </TableRow>
                     </TableHead>
-                    {datas}
+                    <TableBody>
+                        {datas}
+                    </TableBody>
                 </Table>
-                { (this.state.showModule === `delete`) && <Delete modal={this.state.modal} closeModal={this.closeModal} getData={this.getData} data={this.state.categoryDeleted}/> }
+                {/* {
+                    (this.state.showModule === `delete`) && <Delete modal={this.state.modal} closeModal={this.closeModal} getData={this.getData} data={this.state.categoryDeleted}/>
+                } */}
             </Paper>
         );
     }

@@ -7,6 +7,8 @@ import Listcategory from '../components/category/Listcategory';
 import { Button } from '@material-ui/core';
 import {Link} from 'react-router-dom';
 
+import Bar from '../components/AppBar';
+
 
 const styles = theme => ({
     root: {
@@ -27,13 +29,13 @@ function PaperSheet(props) {
     const { classes } = props;
 
     return (
-        <div>
+        <div> <Bar />
             <div className={classes.container}>
                 <Paper className={classes.root} elevation={1}>
                     <Typography variant="headline" component="h3">
               List data category
                     </Typography>
-                    <Button variant="contained" color="primary" button component={Link} to="/categoryadd" >Add Category</Button>
+                    <Button variant="contained" color="primary" component={Link} to="/category/add" >Add Category</Button>
                     {/* <Typography component="p"> */}
                     <Listcategory />
                     {/* </Typography> */}

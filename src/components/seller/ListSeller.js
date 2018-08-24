@@ -103,8 +103,8 @@ class CustomizedTable extends React.Component {
                 <CustomTableCell>{sellers.email}</CustomTableCell>
                 <CustomTableCell>{sellers.phone}</CustomTableCell>
                 <CustomTableCell>
-                    <Button variant="contained" color="primary" button component={Link} to="/sellerupdate">Edit</Button>
-                    <Button color="danger"
+                    <Button variant="contained" color="primary" button component={Link} to="/seller/:id">Edit</Button>
+                    <Button color="secondary"
                         onClick={() => {
                             this.showDelete(sellers);
                         }}

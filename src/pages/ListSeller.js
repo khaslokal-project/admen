@@ -38,7 +38,7 @@ function PaperSheet(props) {
                     <Typography variant="headline" component="h3">
           List data seller
                     </Typography>
-                    <Button variant="contained" color="primary" button component={Link} to="/selleradd" >Add Seller</Button>
+                    <Button variant="contained" color="primary" button component={Link} to="/seller/add" >Add Seller</Button>
                     {/* <Typography component="p"> */}
                     <ListSeller />
                     {/* </Typography> */}

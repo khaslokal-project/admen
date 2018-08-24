@@ -33,10 +33,9 @@ class ComposedTextField extends React.Component {
         this.state = {
             name: '',
             price: '',
-            stock: '',
             brand:'',
-            idcategory: '1',
-            idseller: '1',
+            idcategory: '',
+            idseller: '',
             description: '',
             image: '',
             dataSeller: [],
@@ -53,7 +52,7 @@ class ComposedTextField extends React.Component {
     }
 
     fetchDataSeller(){
-        axios.get(`http://192.168.10.13:8080/sellers/`)
+        axios.get(`${process.env.REACT_APP_API_URL}/sellers/`)
             .then(({ data }) => {
                 this.setState({
                     dataSeller: data
@@ -62,7 +61,7 @@ class ComposedTextField extends React.Component {
     }
 
     fetchDataCategory(){
-        axios.get(`http://192.168.10.13:8080/productcategory/`)
+        axios.get(`${process.env.REACT_APP_API_URL}/productcategory/`)
             .then(({ data }) => {
                 this.setState({
                     dataCategory: data
@@ -70,7 +69,7 @@ class ComposedTextField extends React.Component {
             });
     }
 
-      handleChange = name => event => {
+      handleChange = (name) => event => {
         this.setState({
           [name]: event.target.value
         });

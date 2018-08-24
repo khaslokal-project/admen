@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import Category from './pages/Category';
+import CategoryAdd from './pages/Category';
 import Login from './components/Login';
-import Product from './pages/Product';
-import ListProduct from './pages/ListProduct';
-import Productupdate from './pages/ProductUpdate';
+import ProductAdd from './pages/Product';
+import Product from './pages/ListProduct';
+import ProductUpdate from './pages/ProductUpdate';
 import Sellers from './pages/ListSeller';
-import Selleradd from './pages/Seller';
-import Sellersupdate from './pages/SellerUpdate';
-import ListCategory from './pages/Listcategory';
+import SellerAdd from './pages/Seller';
+import SellersUpdate from './pages/SellerUpdate';
+import Category from './pages/Listcategory';
+import CategoryUpdate from './pages/CategoryUpdate';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 class App extends Component {
@@ -17,14 +18,21 @@ class App extends Component {
                 <Router>
                     <Switch>
                         <Route  path ="/login" component={Login} />
-                        <Route  path="/categoryadd" component={Category} />
-                        <Route  path="/addproduct" component={Product} />
-                        <Route  path="/listproduct" component={ListProduct} />
-                        <Route path="/update" component={Productupdate} />
-                        <Route path="/selleradd" component={Selleradd} />
+                        
+                        
+                        <Route exact path="/category" component={Category} />
+                        <Route exact path="/category/add" component={CategoryAdd} />
+                        <Route path="/category/:id" component={CategoryUpdate} />
+                        
+
+                        <Route  path="/product/add" component={ProductAdd} />
+                        <Route  path="/product" component={Product} />
+                        <Route path="/product/:id" component={ProductUpdate} />
+
+
+                        <Route path="/seller/add" component={SellerAdd} />
                         <Route path="/sellers" component={Sellers} />
-                        <Route path="/sellerupdate" component={Sellersupdate} />
-                        <Route path="/listcategory" component={ListCategory} />
+                        <Route path="/seller/:id" component={SellersUpdate} />
                     </Switch>
                 </Router>
             </div>

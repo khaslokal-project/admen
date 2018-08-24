@@ -20,7 +20,7 @@ export const mailFolderListItems = (
         </ListItem>
 
 
-        <ListItem button component={Link} to="/Listproduct">
+        <ListItem button component={Link} to="/product">
             <ListItemIcon>
                 <ListAlt />
             </ListItemIcon>
@@ -35,7 +35,7 @@ export const mailFolderListItems = (
         </ListItem>
  
    
-        <ListItem button component={Link} to="/listcategory">
+        <ListItem button component={Link} to="/category">
             <ListItemIcon>
                 <SendIcon />
             </ListItemIcon>
