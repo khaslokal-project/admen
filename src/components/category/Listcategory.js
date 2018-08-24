@@ -2,14 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
+import {Link} from 'react-router-dom';
+import {TableCell, Button} from '@material-ui/core';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import pink from '@material-ui/core/colors/pink';
 import deepOrange from '@material-ui/core/colors/deepOrange';
 import axios from 'axios'
+
+import Delete from './Delete';
 
 const CustomTableCell = withStyles(theme => ({
   head: {
@@ -45,53 +47,79 @@ class CustomizedTable extends React.Component {
     constructor(){
         super()
         this.state = {
-            products: [],
+           category: [],
+           showModule: '',
+           categoryDeleted: {}
         }
+
+        this.closeModal = this.closeModal.bind(this);
+        this.showDelete = this.showDelete.bind(this);
     }
     componentDidMount(){
         this.getData()
      }
+
+    showDelete(category){
+      this.setState({
+        showModule: 'delete', 
+        modal: true,
+        categoryDeleted: category
+      })
+    }
+    closeModal() {
+      this.setState({
+          showModule: '',
+          modal: false
+      });
+  }
      getData(){
-         axios.get(`${link}`)
+         axios.get(`/productcategory/`)
          .then((response) => {
              console.log(response);
-             this.setState({products: response.data})
+             this.setState({category: response.data})
          })
          .catch((err) => {
              console.log(err);
          })
      }
+     closeModal() {
+      this.setState({
+          showModule: '',
+          modal: false
+      });
+  }
+
+  
 render() {
   const { classes } = this.props;
-  const products = this.state.products
-  const datas = products.map(products => 
-  <TableRow className={classes.row} key={products.id}>
-    <CustomTableCell component="th" scope="row">
-      {products.name}
+  const category = this.state.category
+  const datas =category.map(category => 
+  <TableRow className={classes.row} key={category.id}>
+    <CustomTableCell component="th" scope="row"> {category.name}
     </CustomTableCell>
-<CustomTableCell>{products.brand}</CustomTableCell>
-<CustomTableCell>{products.description}</CustomTableCell>
-<CustomTableCell>{products.price}</CustomTableCell>
-<CustomTableCell>{products.idcategory}</CustomTableCell>
-<CustomTableCell>{products.idseller}</CustomTableCell>
-  </TableRow>
-  )
+    <CustomTableCell>
+    <Button variant="contained" color="primary" button component={Link} to="/sellerupdate">Edit</Button>
+    <Button color="danger" 
+                onClick={() => {
+                    this.showDelete(category);
+                }}
+            >Delete</Button>
+    </CustomTableCell>
+      </TableRow>
+      )
 
   return (
     <Paper className={classes.root}>
       <Table className={classes.table}>
         <TableHead color='primary'>
           <TableRow>
-            <CustomTableCell>Product Name</CustomTableCell>
-            <CustomTableCell>Brand</CustomTableCell>
-            <CustomTableCell>Description</CustomTableCell>
-            <CustomTableCell>Price</CustomTableCell>
-            <CustomTableCell>Category</CustomTableCell>
-            <CustomTableCell>Seller</CustomTableCell>
+            <CustomTableCell>Category Name</CustomTableCell>
+            <CustomTableCell>Action</CustomTableCell>
           </TableRow>
         </TableHead>
         {datas}
       </Table>
+      { (this.state.showModule === 'delete') && <Delete modal={this.state.modal} closeModal={this.closeModal} getData={this.getData} data={this.state.categoryDeleted}/> }
     </Paper>
   );
 }

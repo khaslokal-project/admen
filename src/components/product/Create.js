@@ -8,84 +8,6 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from 'axios'
 
-const seller = [
-    {
-        value: 1,
-        label: 'mama otak2'
-    }
-]
-
-const categories = [
-    {
-      value: 1,
-      label: 'makanan',
-    },
-    {
-      value: '2',
-      label: 'minuman',
-    },
-    {
-      value: 3,
-      label: 'oleh-oleh',
-    },
-    {
-      value: 4,
-      label: 'kerajinan',
-    },
-    {
-        value: 5,
-        label: 'perizinan',
-      },
-      {
-        value: 6,
-        label: 'jasa',
-      },
-      {
-        value: 7,
-        label: 'tiket',
-      },
-      {
-        value: 8,
-        label: 'tas',
-      },
-      {
-        value: 9,
-        label: 'aksesoris',
-      },
-      {
-        value: 10,
-        label: 'buah-buahan',
-      },
-      {
-        value: 11,
-        label: 'pakaian',
-      },
-      {
-        value: 12,
-        label: 'sepatu',
-      },
-      {
-        value: 13,
-        label: 'tanaman',
-      },
-      {
-        value: 14,
-        label: 'sayuran',
-      },
-      {
-        value: 15,
-        label: 'lauk pauk',
-      },
-      {
-        value: 16,
-        label: 'daging',
-      },
-      {
-        value: 17,
-        label: 'herbal',
-      },
-  ];
-
 const styles = theme => ({
   container: {
     display: 'flex',
@@ -117,11 +39,36 @@ class ComposedTextField extends React.Component {
             idseller: '1',
             description: '',
             image: '',
+            dataSeller: [],
+            dataCategory: []
         
           };
           this.submitHandler = this.submitHandler.bind(this);
           this.handleChange = this.handleChange.bind(this);
       }
+
+      componentDidMount(){
+        this.fetchDataSeller();
+        this.fetchDataCategory();
+    }
+
+    fetchDataSeller(){
+        axios.get(`http://192.168.10.13:8080/sellers/`)
+            .then(({ data }) => {
+                this.setState({
+                    dataSeller: data
+                });
+            });
+    }
+
+    fetchDataCategory(){
+        axios.get(`http://192.168.10.13:8080/productcategory/`)
+            .then(({ data }) => {
+                this.setState({
+                    dataCategory: data
+                });
+            });
+    }
 
       handleChange = name => event => {
         this.setState({
@@ -135,7 +82,6 @@ class ComposedTextField extends React.Component {
         const products = {
             name : this.state.name,
             price : this.state.price, 
-            // stock : this.state.stock, 
             brand : this.state.brand,
             idcategory : this.state.idcategory,
             idseller : this.state.idseller, 
@@ -143,7 +89,8 @@ class ComposedTextField extends React.Component {
             image : this.state.image
           };
         axios
-          .post("http://192.168.10.40:8080/products", {name : this.state.name,
+          .post(`http://192.168.10.13:8080/products/`,
+          {name : this.state.name,
           price : this.state.price, 
           // stock : this.state.stock, 
           brand : this.state.brand,
@@ -169,10 +116,12 @@ class ComposedTextField extends React.Component {
         <FormControl className={classes.formControl}>
           <InputLabel>Product Name</InputLabel>
           <Input value={this.state.name} onChange={this.handleChange('name')} />
+          
         </FormControl>
         <FormControl className={classes.formControl}>
           <InputLabel>Price</InputLabel>
           <Input value={this.state.price} onChange={this.handleChange('price')} />
+          
         </FormControl>
         {/* <FormControl className={classes.formControl}>
           <InputLabel htmlFor="name-simple">Stock</InputLabel>
@@ -185,6 +134,7 @@ class ComposedTextField extends React.Component {
         <FormControl className={classes.formControl}>
         <TextField
           select
+          label="Category"
           className={classes.textField}
           value={this.state.idcategory}
           onChange={this.handleChange('idcategory')}
@@ -196,18 +146,21 @@ class ComposedTextField extends React.Component {
           }}
           margin="normal"
         >
-          {categories.map(option => (
+        {
+            this.state.dataCategory.map(item => (<option key={item.id} value={item.id}> {item.name} </option>))
+          }
+          {/* {categories.map(option => (
             <option key={option.value} value={option.value} >
               {option.label}
             </option>
-          ))}
+          ))} */}
         </TextField>
         </FormControl>
 
         <FormControl className={classes.formControl}>
         <TextField
           select
-          label="Select"
+          label="Seller"
           className={classes.textField}
           value={this.state.idseller}
           onChange={this.handleChange('idseller')}
@@ -219,31 +172,34 @@ class ComposedTextField extends React.Component {
           }}
           margin="normal"
         >
-          {seller.map(option => (
+        {
+            this.state.dataSeller.map(item => (<option key={item.id} value={item.username} > {item.username}</option>))
+          }
+          {/* {seller.map(option => (
             <option key={option.value} value={option.value}>
               {option.label}
             </option>
-          ))}
+          ))} */}
         </TextField>
         </FormControl>
         
         <TextField
           label="Description"
           value={this.state.description} onChange={this.handleChange('description')}
-          placeholder="Product descriptions"
           fullWidth
           margin="normal"
         />
         <TextField
           label="Image"
           value={this.state.image} onChange={this.handleChange('image')}
-          placeholder="image link"
           fullWidth
           margin="normal"
         />
 
         <Button variant="contained" color="primary" type="submit" className={classes.button}>
             Add
+        </Button>
+        <Button style={{marginLeft: '8px'}}  variant="contained" color="primary" type="button" onClick={this.close} className={classes.button}> Cancel
         </Button>
         </form>
         

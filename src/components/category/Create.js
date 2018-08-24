@@ -48,7 +48,7 @@ class ComposedTextField extends React.Component {
             name : this.state.name,
           };
         axios
-          .post(`${link}`, {name : this.state.name})
+          .post(`http://192.168.10.13:8080/productcategory/}`, {name : this.state.name})
           .then(res => {
             console.log(res);
             console.log(res.data);

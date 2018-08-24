@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import ListProduct from '../components/product/ListProduct'
+import Listcategory from '../components/category/Listcategory';
 import Bar from '../components/AppBar'
 import { Button } from '@material-ui/core';
 import {Link} from 'react-router-dom'
@@ -32,15 +32,15 @@ function PaperSheet(props) {
 
   return (
     <div>
-        <Bar />
+        <Bar/>
         <div className={classes.container}>
       <Paper className={classes.root} elevation={1}>
         <Typography variant="headline" component="h3">
-          List data product
+          List data category
         </Typography>
-        <Button variant="contained" color="danger" button component={Link} to="/addproduct" >Add Product</Button>
+        <Button variant="contained" color="danger" button component={Link} to="/categoryadd" >Add Category</Button>
         <Typography component="p">
-          <ListProduct />
+          <Listcategory />
         </Typography>
       </Paper>
       </div>
