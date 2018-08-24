@@ -65,7 +65,7 @@ class ComposedTextField extends React.Component {
             phone : this.state.phone
           };
         axios
-          .post(`http://192.168.10.13:8080/sellers/register`, {username : this.state.username,
+          .post(`${process.env.REACT_APP_API_URL}/sellers/register`, {username : this.state.username,
           firstname : this.state.firstname, 
           lastname : this.state.lastname,
           address : this.state.address,

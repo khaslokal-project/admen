@@ -10,10 +10,10 @@ class Delete extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            dialog: props.dialog
+            modal: props.modal
         };
     
-        this.handleClosed = this.handleClosed.bind(this);        
+        this.handleClosed = this.handleClosed.bind(this);
 
         this.delete = this.delete.bind(this);
         this.close = this.close.bind(this);
@@ -26,11 +26,11 @@ class Delete extends React.Component {
                 <Dialog  onClosed={this.handleClosed}>
                     <DialogTitle>Konfirmasi</DialogTitle>
                     <DialogContent>
-                    <DialogContentText>Apakah anda ingin menghapus kategpri  {this.props.data.name} ini?
-                    </DialogContentText>
+                        <DialogContentText>Apakah anda ingin menghapus kategpri  {this.props.data.name} ini?
+                        </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                        <Button color="primary" onClick={this.delete}>Ya</Button>{' '}
+                        <Button color="primary" onClick={this.delete}>Ya</Button>{` `}
                         <Button color="secondary" onClick={this.close}>Tidak</Button>
                     </DialogActions>
                 </Dialog>

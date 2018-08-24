@@ -89,7 +89,7 @@ class ComposedTextField extends React.Component {
             image : this.state.image
           };
         axios
-          .post(`http://192.168.10.13:8080/products/`,
+          .post(`${process.env.REACT_APP_API_URL}/products/`,
           {name : this.state.name,
           price : this.state.price, 
           // stock : this.state.stock, 
@@ -123,10 +123,6 @@ class ComposedTextField extends React.Component {
           <Input value={this.state.price} onChange={this.handleChange('price')} />
           
         </FormControl>
-        {/* <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="name-simple">Stock</InputLabel>
-          <Input value={this.state.stock} onChange={this.handleChange('stock')} />
-        </FormControl> */}
         <FormControl className={classes.formControl}>
           <InputLabel>Brand</InputLabel>
           <Input value={this.state.brand} onChange={this.handleChange('brand')} />
@@ -149,11 +145,6 @@ class ComposedTextField extends React.Component {
         {
             this.state.dataCategory.map(item => (<option key={item.id} value={item.id}> {item.name} </option>))
           }
-          {/* {categories.map(option => (
-            <option key={option.value} value={option.value} >
-              {option.label}
-            </option>
-          ))} */}
         </TextField>
         </FormControl>
 
@@ -175,11 +166,6 @@ class ComposedTextField extends React.Component {
         {
             this.state.dataSeller.map(item => (<option key={item.id} value={item.username} > {item.username}</option>))
           }
-          {/* {seller.map(option => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))} */}
         </TextField>
         </FormControl>
         

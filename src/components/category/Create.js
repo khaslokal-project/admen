@@ -23,14 +23,12 @@ const styles = theme => ({
   },
 });
 
-
 class ComposedTextField extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
-        
-          };
+          name: ''
+        };
           this.submitHandler = this.submitHandler.bind(this);
           this.handleChange = this.handleChange.bind(this);
       }
@@ -48,10 +46,8 @@ class ComposedTextField extends React.Component {
             name : this.state.name,
           };
         axios
-          .post(`http://192.168.10.13:8080/productcategory/}`, {name : this.state.name})
+          .post(`${process.env.REACT_APP_API_URL}/productcategory/}`, {name : this.state.name})
           .then(res => {
-            console.log(res);
-            console.log(res.data);
             this.setState({ products });
           });
       }

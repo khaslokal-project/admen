@@ -6,24 +6,24 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import axios from 'axios'
+import axios from 'axios';
 
 const styles = theme => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
+    container: {
+        display: `flex`,
+        flexWrap: `wrap`,
+        justifyContent: `center`,
     
-  },
-  button: {
-    justifyContent: 'center',
-    textAlign: 'center',
-    marginTop:30,
-  },
-  formControl: {
-    margin: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-  },
+    },
+    button: {
+        justifyContent: `center`,
+        textAlign: `center`,
+        marginTop:30,
+    },
+    formControl: {
+        margin: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+    },
 });
 
 
@@ -31,21 +31,21 @@ class ComposedTextField extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: '',
-            firstname:'',
-            lastname:'',
-            address:'',
-            password:'',
-            email:'',
-            phone: ''
+            username: ``,
+            firstname:``,
+            lastname:``,
+            address:``,
+            password:``,
+            email:``,
+            phone: ``
         
-          };
-          this.handleChange = this.handleChange.bind(this);
-          this.handleSubmit = this.handleSubmit.bind(this);
-      }
+        };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
 
-      componentDidMount(){
-        axios.get(`/sellers/${this.props.id}`)
+    componentDidMount(){
+        axios.get(`${process.env.REACT_APP_API_URL}/sellers/${this.props.id}`)
             .then(res => {
                 this.setState({
                     username: res.data.username,
@@ -79,89 +79,89 @@ class ComposedTextField extends React.Component {
             });
     }
 
-  render() {
-    const { classes } = this.props;
+    render() {
+        const { classes } = this.props;
 
-    return (
-      <div className={classes.container}>
-      <form onSubmit={this.submitHandler}>
+        return (
+            <div className={classes.container}>
+                <form onSubmit={this.submitHandler}>
 
-        <FormControl className={classes.formControl}>
-          <InputLabel>Username</InputLabel>
-          <Input type="text" 
-                name="username"
-                value={this.state.username}
-                id="username"
-                onChange={this.handleChange} />
+                    <FormControl className={classes.formControl}>
+                        <InputLabel>Username</InputLabel>
+                        <Input type="text"
+                            name="username"
+                            value={this.state.username}
+                            id="username"
+                            onChange={this.handleChange} />
           
-        </FormControl>
-        <FormControl className={classes.formControl}>
-          <InputLabel>Firstname</InputLabel>
-          <Input 
-                type="text"
-                name="firstname"
-                value={this.state.firstname}
-                id="firstname" 
-                onChange={this.handleChange}/>
-        </FormControl>
+                    </FormControl>
+                    <FormControl className={classes.formControl}>
+                        <InputLabel>Firstname</InputLabel>
+                        <Input
+                            type="text"
+                            name="firstname"
+                            value={this.state.firstname}
+                            id="firstname"
+                            onChange={this.handleChange}/>
+                    </FormControl>
         
-        <FormControl className={classes.formControl}>
-          <InputLabel>Lastname</InputLabel>
-          <Input 
-                type="text" 
-                name="lastname" 
-                value={this.state.lastname}
-                id="lastname" 
-                onChange={this.handleChange}/>
-        </FormControl> 
+                    <FormControl className={classes.formControl}>
+                        <InputLabel>Lastname</InputLabel>
+                        <Input
+                            type="text"
+                            name="lastname"
+                            value={this.state.lastname}
+                            id="lastname"
+                            onChange={this.handleChange}/>
+                    </FormControl>
 
-        <FormControl className={classes.formControl}>
-          <InputLabel>Password</InputLabel>
-          <Input 
-                 type="text" 
-                 name="password" 
-                 value={this.state.password}
-                 id="password" 
-                 onChange={this.handleChange}/>
-        </FormControl>
+                    <FormControl className={classes.formControl}>
+                        <InputLabel>Password</InputLabel>
+                        <Input
+                            type="text"
+                            name="password"
+                            value={this.state.password}
+                            id="password"
+                            onChange={this.handleChange}/>
+                    </FormControl>
 
         
-        <TextField
-                label="Address"
-                type="text" 
-                name="email" 
-                value={this.state.email}
-                id="email" 
-                onChange={this.handleChange}
-                fullWidth
-                margin="normal"
-        />
+                    <TextField
+                        label="Address"
+                        type="text"
+                        name="email"
+                        value={this.state.email}
+                        id="email"
+                        onChange={this.handleChange}
+                        fullWidth
+                        margin="normal"
+                    />
 
-        <TextField
-                label="Phone"
-                type="text" 
-                name="phone"
-                value={this.state.phone}
-                id="phone"
-                onChange={this.handleChange}
-                fullWidth
-                margin="normal"
-        />
+                    <TextField
+                        label="Phone"
+                        type="text"
+                        name="phone"
+                        value={this.state.phone}
+                        id="phone"
+                        onChange={this.handleChange}
+                        fullWidth
+                        margin="normal"
+                    />
 
-        <Button  variant="contained" color="primary" type="submit" className={classes.button}>
+                    <Button  variant="contained" color="primary" type="submit" className={classes.button}>
             Save
-        </Button>
-        <Button style={{marginLeft: '8px'}}  variant="contained" color="primary" type="button" onClick={this.close} className={classes.button}> Cancel
-        </Button>
-        </form>
+                    </Button>
+                    <Button style={{marginLeft: `8px`}}  variant="contained" color="primary" type="button" onClick={this.close} className={classes.button}> Cancel
+                    </Button>
+                </form>
         
-      </div>
-    );
-  }
+            </div>
+        );
+    }
 }
 
 ComposedTextField.propTypes = {
-  classes: PropTypes.object.isRequired,
+    classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(ComposedTextField);

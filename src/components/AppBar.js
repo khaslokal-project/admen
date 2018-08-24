@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import { Link } from 'react-router-dom'
 import { mailFolderListItems, otherMailFolderListItems } from './tileData';
 
 const styles = {
@@ -63,10 +64,9 @@ class TemporaryDrawer extends React.Component {
           <Typography variant="title" color="inherit" className={classes.flex}>
             Home
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit" component={Link} to="/login" >Login</Button>
         </Toolbar>
       </AppBar>
-        {/* <Button onClick={this.toggleDrawer('left', true)}>Open Left</Button> */}
         <Drawer open={this.state.left} onClose={this.toggleDrawer('left', false)}>
           <div
             tabIndex={0}

@@ -72,7 +72,7 @@ class ComposedTextField extends React.Component {
       
       handleSubmit(event){
         event.preventDefault();
-        axios.put(`${process.env.REACT_APP_API_URL}/products/${this.props.id}`, this.state)
+        axios.put(`http://192.168.10.13:8080/products/${this.props.id}`, this.state)
             .then(res => {
                 this.close();
                 this.props.fetchData();

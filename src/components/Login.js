@@ -71,7 +71,7 @@ class Login extends Component {
   submitHandler(e) {
     e.preventDefault();
     axios
-        .post(`/admin/login`, this.state)
+        .post(`http://192.168.10.13:8080/admins/login`, this.state)
         .then(res => {
             if (res.data.error) {
                 return this.setState({ error: res.data.message });
