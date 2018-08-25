@@ -56,7 +56,7 @@ class TemporaryDrawer extends React.Component {
 
     return (
       <div>
-          <AppBar position="static">
+          <AppBar to="/product" position="static">
         <Toolbar>
           <IconButton onClick={this.toggleDrawer('left', true)} className={classes.menuButton} color="inherit" aria-label="Menu">
             <MenuIcon />
@@ -64,7 +64,7 @@ class TemporaryDrawer extends React.Component {
           <Typography variant="title" color="inherit" className={classes.flex}>
             Home
           </Typography>
-          <Button color="inherit" component={Link} to="/login" >Login</Button>
+          <Button color="primary" component={Link} to="/login" >Login</Button>
         </Toolbar>
       </AppBar>
         <Drawer open={this.state.left} onClose={this.toggleDrawer('left', false)}>
